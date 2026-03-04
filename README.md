@@ -1,404 +1,348 @@
 # DeepQShield: A Quantum-Resilient Deepfake Detection Framework
 
-**A Quantum-Resilient Deepfake Detection Framework Using Lattice-Enhanced ResNeXt and Post-Quantum Cryptography Defense**
+A **quantum-resilient deepfake detection system** combining **ResNeXt-based computer vision**, **lattice-based adversarial learning**, and **post-quantum cryptography (PQC)** to create a secure and robust deepfake detection pipeline.
 
-## Technical Components
+---
 
-### Lattice-Based Learning Module
+# 📄 Research Publication
 
-The `LatticeLayer` and `LatticeCryptoModule` classes implement a novel approach inspired by lattice-based cryptography:
+This project is based on our **peer-reviewed research paper published in Nature Scientific Reports**.
+
+🔗 Paper Link  
+https://www.nature.com/articles/s41598-026-38924-7
+
+### Title
+**A Quantum-Resilient Deepfake Detection Framework Using Enhanced ResNeXt and Post-Quantum Cryptography Defence**
+
+### Citation
+
+```
+Shreeya, K. N., Subburaj, B., Saketh, K. S. G., Padmavathy, T. V.,
+Alphonse, S., & Subramanian, G. (2026).
+A Quantum-Resilient Deepfake Detection Framework using Enhanced
+ResNeXt and Post-Quantum Cryptography Defence.
+Scientific Reports (Nature Portfolio).
+https://doi.org/10.1038/s41598-026-38924-7
+```
+
+If you use this repository in research, please cite the above paper.
+
+---
+
+# 🚀 Overview
+
+Deepfake technology is becoming increasingly sophisticated, making detection systems vulnerable to adversarial manipulation and future quantum threats.
+
+**DeepQShield** addresses these challenges through:
+
+- Deep Learning based detection
+- Lattice-based feature transformation
+- Post-Quantum Cryptographic protection
+- Secure verification of detection outputs
+
+The system ensures **robust deepfake detection with cryptographic integrity**.
+
+---
+
+# 🧠 Key Features
+
+- ResNeXt-based deepfake detection architecture
+- Lattice-based adversarial robustness
+- Quantum-safe cryptographic verification
+- Hybrid classical + PQC security
+- Secure inference pipeline
+- High detection accuracy (>95%)
+
+---
+
+# 🏗 System Architecture
+
+The detection framework integrates three core modules:
+
+1. Deep Learning Module  
+2. Lattice-Enhanced Feature Processing  
+3. Post-Quantum Cryptography Security Layer  
+
+Pipeline:
+
+```
+Input Image
+      ↓
+ResNeXt Feature Extraction
+      ↓
+Lattice-Based Feature Transformation
+      ↓
+Attention-Based Feature Fusion
+      ↓
+Classification Head
+      ↓
+Post-Quantum Cryptographic Verification
+      ↓
+Secure Detection Result
+```
+
+---
+
+# 🔬 Technical Components
+
+## 1. Lattice-Based Learning Module
+
+The **LatticeLayer** introduces structured noise based on **Learning With Errors (LWE)** principles.
 
 ```python
 class LatticeLayer(nn.Module):
     """
     Implements structured noise addition based on Learning with Errors (LWE)
     - Learnable lattice basis matrix
-    - Configurable error distribution
-    - Layer normalization for stability
+    - Configurable noise distribution
+    - Feature normalization for stability
     """
 ```
 
-**Key Features**:
-- Adds structured noise during training for robustness
-- Learns optimal lattice basis through backpropagation
-- Provides regularization effect similar to dropout but with cryptographic principles
+### Benefits
 
-### Advanced ResNeXt Detector
-
-The `AdvancedResNeXtDeepfakeDetector` combines:
-- **Backbone**: ResNeXt-50 feature extractor
-- **Lattice Enhancement**: Multi-layer lattice-based feature transformation
-- **Feature Fusion**: Concatenates original and lattice-enhanced features
-- **Attention Mechanism**: Self-attention for feature importance weighting
-- **Classification Head**: Multi-layer classifier with dropout regularization
-
-### Post-Quantum Cryptography
-
-The `pqc.py` module implements:
-
-1. **Kyber-1024 (Key Encapsulation Mechanism)**:
-   - Generates quantum-safe shared secrets
-   - 256-bit quantum security level
-   - NIST FIPS-approved algorithm
-
-2. **Dilithium-5 (Digital Signatures)**:
-   - Produces quantum-resistant signatures
-   - Verifiable cryptographic proofs
-   - Forensic-grade evidence generation
-
-3. **Hybrid Cryptography**:
-   - Combines PQC with classical algorithms (RSA, ECDH)
-   - Provides defense-in-depth security
-   - Future-proof against quantum threats
+- Improves adversarial robustness  
+- Enhances feature diversity  
+- Provides regularization similar to dropout  
 
 ---
 
-## Installation & Setup
+## 2. Advanced ResNeXt Detector
 
-### Prerequisites
+The model architecture includes:
 
-```bash
-# Python 3.8 or higher
+**Backbone**
+
+ResNeXt-50 CNN feature extractor
+
+**Enhancements**
+
+- Lattice feature transformation  
+- Attention based feature weighting  
+- Feature fusion layers  
+
+**Classifier**
+
+Fully connected classification head with dropout.
+
+---
+
+# 🔐 Post-Quantum Cryptography Module
+
+The project integrates **NIST-standardized PQC algorithms**.
+
+## Kyber-1024
+
+- Key encapsulation mechanism  
+- 256-bit quantum security  
+- Used for secure key exchange  
+
+## Dilithium-5
+
+- Quantum-safe digital signatures  
+- Verification of detection outputs  
+
+## Hybrid Cryptography
+
+Combines:
+
+- Classical cryptography  
+- Post-quantum cryptography  
+
+for stronger security.
+
+---
+
+# ⚙ Installation
+
+## Requirements
+
+Python 3.8+
+
+GPU recommended for training.
+
+Check environment:
+
+```
 python --version
-
-# CUDA-capable GPU (recommended for training)
 nvidia-smi
 ```
 
-### Install Dependencies
+---
 
-```bash
-# Core deep learning libraries
+# 📦 Install Dependencies
+
+```
 pip install torch torchvision torchaudio
 pip install timm albumentations
-
-# Scientific computing
-pip install numpy pandas scikit-learn matplotlib seaborn
-
-# Computer vision
+pip install numpy pandas scikit-learn
+pip install matplotlib seaborn
 pip install opencv-python Pillow
-
-# Post-quantum cryptography 
 pip install liboqs-python cryptography
-
-# Utilities
 pip install tqdm
 ```
 
-### Verify Installation
+Verify installation:
 
-```bash
+```
 python test_pqc.py
 ```
 
 ---
 
-## Usage Instructions
+# 📊 Dataset
 
-### 1. Dataset Preparation
+Primary dataset used:
 
-The notebook `deepfakefinal_final.ipynb` includes automated dataset preparation:
+**140K Real and Fake Faces**
 
-```python
-# Cell 1: Downloads and organizes the 140k Real and Fake Faces dataset
-# - Automatically downloads from Kaggle
-# - Extracts and organizes into Final Dataset/real and Final Dataset/fake
-# - Creates dataset.csv with image paths and labels
-```
+https://www.kaggle.com/datasets/xhlulu/140k-real-and-fake-faces
 
-**Manual Setup** (if needed):
+Alternative datasets supported:
+
+- Celeb-DF (V2)
+- FaceForensics++
+
+Dataset format:
+
 ```
 Final Dataset/
-├── real/          # Real face images
-├── fake/          # Fake face images
-└── dataset.csv    # Image paths and labels
+├── real/
+├── fake/
+└── dataset.csv
 ```
 
-#### Available Datasets
+---
 
-The framework can be trained on various deepfake detection datasets:
+# 🏋 Model Training
 
-1. **140K Real and Fake Faces (DFDC)**  
-   https://www.kaggle.com/datasets/xhlulu/140k-real-and-fake-faces  
-   Primary dataset used in this implementation with 70,000 real and 70,000 fake face images.
+Configuration example:
 
-2. **Celeb-DF (V2)**  
-   https://www.kaggle.com/datasets/reubensuju/celeb-df-v2  
-   High-quality deepfake dataset featuring celebrity faces with diverse manipulation techniques.
-
-3. **FaceForensics++ (FF++)**  
-   https://www.kaggle.com/datasets/greatgamedota/faceforensics  
-   Comprehensive benchmark dataset with multiple deepfake generation methods including DeepFakes, Face2Face, FaceSwap, and NeuralTextures.
-
-**Note**: Adjust the data paths in the configuration (Cell 5) when using alternative datasets.
-
-### 2. Model Training
-
-Execute the notebook cells sequentially:
-
-**Configuration** (Cell 5):
 ```python
 config = Config()
-config.data_root = "path/to/Final Dataset"
+config.data_root = "dataset_path"
 config.batch_size = 32
 config.num_epochs = 50
 config.learning_rate = 1e-4
 ```
 
-**Training** (Cell 11):
+Training:
+
 ```python
 model = AdvancedResNeXtDeepfakeDetector(config).to(config.device)
+
 trainer = DeepfakeTrainer(model, config)
+
 trainer.train(train_loader, val_loader)
 ```
 
-### 3. Model Evaluation
+---
 
-**Testing** (Cell 12):
-```python
+# 📈 Evaluation
+
+```
 test_preds, test_probs, test_targets, test_features = evaluate_model(
     model, test_loader, config.device
 )
-print(f'Test Accuracy: {test_accuracy:.2f}%')
-print(f'AUC Score: {test_auc:.4f}')
 ```
 
-### 4. Secure Inference with PQC
+Metrics evaluated:
 
-**Standard PQC Protection**:
+- Accuracy  
+- Precision  
+- Recall  
+- AUC-ROC  
+
+---
+
+# 🔐 Secure Inference
+
+Example detection with PQC verification.
+
 ```python
-from pqc import quantum_crypto_manager
-
-# Generate secure detection result
 secure_result = quantum_crypto_manager.secure_detection_result(
     detection_result={"prediction": "fake", "confidence": 0.95},
-    image_metadata={"filename": "test.jpg", "timestamp": "2025-10-31"}
+    image_metadata={"filename": "test.jpg"}
 )
+```
 
-# Verify cryptographic proof
+Verification:
+
+```python
 is_valid = quantum_crypto_manager.verify_cryptographic_proof(
     data=secure_result.detection_result,
     proof=secure_result.cryptographic_proof
 )
 ```
 
-**Hybrid PQC Protection** (Maximum Security):
-```python
-# Use hybrid classical + post-quantum cryptography
-hybrid_result = quantum_crypto_manager.hybrid_secure_detection_result(
-    detection_result={"prediction": "fake", "confidence": 0.95},
-    image_metadata={"filename": "test.jpg"}
-)
+---
 
-# Verify hybrid proof (both PQC and classical signatures)
-verification = quantum_crypto_manager.verify_hybrid_detection_result(
-    data=hybrid_result.detection_result,
-    hybrid_result=hybrid_result
-)
-```
+# 📦 Model Export
 
-### 5. Production Deployment
+Export trained model for deployment.
 
-**Export Model** (Cell 15):
 ```python
 export_model_for_deployment(model, config)
-# Creates:
-# - complete_model.pth (PyTorch format)
-# - deepfake_model.onnx (ONNX format for cross-platform deployment)
-# - config.json (model configuration)
-# - model_summary.json (performance metrics)
 ```
 
-**Inference API** (Cell 14):
-```python
-inference_engine = ProductionInference(config.model_save_path, config)
-result = inference_engine.predict_single_image("path/to/image.jpg")
-print(f"Prediction: {result['prediction']}")
-print(f"Confidence: {result['confidence']:.3f}")
+Generated files:
+
+```
+complete_model.pth
+deepfake_model.onnx
+config.json
+model_summary.json
 ```
 
 ---
 
-## Reproducibility
+# 📊 Performance
 
-### Training Configuration
-
-```python
-# Random seed for reproducibility
-SEED = 42
-random.seed(SEED)
-np.random.seed(SEED)
-torch.manual_seed(SEED)
-torch.cuda.manual_seed_all(SEED)
-torch.backends.cudnn.deterministic = True
-torch.backends.cudnn.benchmark = False
-```
-
-### Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
-| Image Size | 224×224 | Input resolution |
-| Batch Size | 32 | Training batch size |
-| Learning Rate | 1×10⁻⁴ | Initial learning rate |
-| Optimizer | AdamW | With weight decay 1×10⁻⁴ |
-| Scheduler | CosineAnnealingWarmRestarts | T₀=10, η_min=1×10⁻⁶ |
-| Epochs | 50 | Maximum training epochs |
-| Early Stopping | 10 | Patience in epochs |
-| Dropout Rate | 0.3 | Regularization |
-| Lattice Dimension | 256 | Latent feature space |
-| Noise Std | 0.1 | LWE noise parameter |
-
-### Loss Functions
-
-- **Focal Loss** (α=2, γ=2): Addresses class imbalance
-- **Label Smoothing** (ε=0.1): Prevents overconfidence
-- **Combined Loss**: 0.7 × Focal + 0.3 × Label Smoothing
-
----
-
-## Performance Metrics
-
-### Detection Performance
-
-Expected results on the 140K Real and Fake Faces dataset:
+Expected results:
 
 | Metric | Value |
-|--------|-------|
-| Test Accuracy | >95% |
-| AUC-ROC | >0.98 |
-| True Positive Rate | >94% |
-| True Negative Rate | >96% |
-| Inference Time | ~15-25 ms/image (GPU) |
-
-### Cryptographic Performance
-
-| Operation | Time (ms) | Security Level |
-|-----------|-----------|----------------|
-| Kyber Key Generation | <1 | NIST Level 5 |
-| Kyber Encapsulation | <1 | 256-bit quantum |
-| Dilithium Signature | <2 | NIST Level 5 |
-| Dilithium Verification | <1 | 256-bit quantum |
-| Hybrid Signature | <5 | Maximum |
+|------|------|
+Accuracy | >95% |
+AUC-ROC | >0.98 |
+Inference Time | ~15–25 ms |
 
 ---
 
-## File Structure
+# 📁 Project Structure
 
 ```
 DeepQShield/
-├── deepfakefinal_final.ipynb    # Main training and evaluation notebook
-│   ├── Cell 1-2: Dataset preparation
-│   ├── Cell 3-5: Configuration and imports
-│   ├── Cell 4-7: Lattice module and model architecture
-│   ├── Cell 8-10: Data loading and loss functions
-│   ├── Cell 11-12: Training and evaluation
-│   ├── Cell 13-15: Visualization and export
-│   └── Cell 16-19: Advanced analysis
-│
-├── pqc.py                        # Post-quantum cryptography module
-│   ├── EnterpriseKyber: Kyber-1024 implementation
-│   ├── EnterpriseDilithium: Dilithium-5 implementation
-│   ├── HybridPQCManager: Hybrid cryptography
-│   └── EnterpriseQuantumSafeCrypto: Main PQC manager
-│
-├── test_pqc.py                   # PQC module unit tests
-└── README.md                     # This file
+
+deepfakefinal_final.ipynb
+pqc.py
+test_pqc.py
+README.md
 ```
 
 ---
 
-## Dependencies
+# 👩‍💻 Authors
 
-### Core Libraries
+**Kollipara Naga Shreeya**  
+Vellore Institute of Technology, India
 
-```
-torch >= 2.0.0
-torchvision >= 0.15.0
-timm >= 0.9.0
-numpy >= 1.24.0
-pandas >= 2.0.0
-scikit-learn >= 1.3.0
-opencv-python >= 4.8.0
-albumentations >= 1.3.0
-matplotlib >= 3.7.0
-seaborn >= 0.12.0
-Pillow >= 10.0.0
-```
+**Brindha Subburaj**  
+Vellore Institute of Technology, India
 
-### Post-Quantum Cryptography (Optional)
+**Kollipara Sai Govinda Saketh**  
+Vellore Institute of Technology, India
 
-```
-liboqs-python >= 0.8.0    # NIST-standardized PQC algorithms
-cryptography >= 41.0.0    # Classical cryptography support
-```
+**T V Padmavathy**  
+Vellore Institute of Technology, India
 
-**Note**: If `liboqs-python` is not available, the system falls back to a simplified implementation suitable for demonstration purposes. For correctly checking cryptographic operations, installing `liboqs-python` is **strongly recommended**.
+**Sherly Alphonse**  
+Vellore Institute of Technology, India
 
-## Testing
-
-### Unit Tests
-
-```bash
-# Test PQC module functionality
-python test_pqc.py
-
-# Expected output:
-# ✓ Key generation test passed
-# ✓ Kyber encapsulation/decapsulation test passed
-# ✓ Dilithium signature/verification test passed
-# ✓ Hybrid cryptography test passed
-# ✓ Secure detection result test passed
-```
-
-### Integration Tests
-
-Run the notebook sequentially to verify:
-1. Dataset loading and preprocessing
-2. Model training convergence
-3. Evaluation metrics meet thresholds
-4. Cryptographic operations function correctly
-5. Model export succeeds
-
-## Reviewer Notes
-
-### For Reproducibility Verification
-
-1. **Environment**: Python 3.8+, CUDA 11.7+, 16GB RAM minimum
-2. **Expected Runtime**: ~4-6 hours for full training (50 epochs, GPU)
-3. **Checkpoint**: Best model saved automatically at `best_deepfake_model.pth`
-4. **Logs**: Training metrics logged to console and stored in trainer object
-
-### For Code Review
-
-- **Main Algorithm**: Cells 4-7 in notebook (Lattice modules and model architecture)
-- **PQC Implementation**: `pqc.py` lines 70-745
-- **Training Loop**: Cell 10 in notebook (DeepfakeTrainer class)
-- **Evaluation**: Cells 12-13 in notebook
-
-### For Theoretical Verification
-
-- **Lattice-Based Learning**: See `LatticeLayer` class (notebook Cell 4)
-- **Security Proofs**: Based on LWE and MLWE hardness assumptions
-- **Cryptographic Correctness**: Verified through NIST standardization process
+**Girish Subramanian**  
+Penn State Harrisburg, United States
 
 ---
-## Authors
 
-- **Kollipara Naga Shreeya** - kollipara.naga2023@vitstudent.ac.in  
-  Vellore Institute of Technology, India
+# 📜 License
 
-- **Brindha Subburaj** - brindha.s@vit.ac.in  
-  Vellore Institute of Technology, India
-
-- **Kollipara Sai Govinda Saketh** - Kollipara.sai2023@vitstudent.ac.in  
-  Vellore Institute of Technology, India
-
-- **T V Padmavathy** - padmavathy.tv@vit.ac.in  
-  Vellore Institute of Technology, India
-
-- **Sherly Alphonse** - sherly.a@vit.ac.in  
-  Vellore Institute of Technology, India
-
-- **Girish Subramanian** - ghs2@psu.edu  
-  Penn State Harrisburg, United States
+This project is released for **research and academic purposes**.
